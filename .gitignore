@@ -1,0 +1,12 @@
+a.out
+tests/
+script.sh
+*.sw?
+cmake-build-debug/
+CMakeLists.txt
+.idea/
+support_projects/
+doc/
+bin/
+test/
+formama9

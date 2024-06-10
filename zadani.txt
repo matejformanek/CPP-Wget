@@ -1,0 +1,34 @@
+Downloader (mirror)
+
+PROGTEST ZADANI:
+Tato semestrální práce patří do kategorie konzolových utilit. Vaším cílem je vytvořit nástroj, který uživatel z terminálu spustí (s různými parametry). Případné parametry nástroje se nesnažte definovat přímo v kódu (a to ani pomocí konstant). Umístěte je do konfiguračních souborů (jednoho nebo více), které váš program bude načítat.
+Vaším cílem je napsat nástroj, který se bude chovat podobně jako nástroj wget --mirror, který na příkazové řádce z URL (pomocí protokolu HTTP) vytvoří lokální kopii.
+Implementujte následující funkcionality:
+Nástroj postupně bude stahovat jednotlivé stránky a související soubory, dokud nenaklonuje požadovaný cíl (na vstupu je možné zadat více zdrojů).
+Nástroj umožňuje parametrizaci alespoň těchto kritérií:
+složka, kam se mají stažené soubory uložit,
+hloubka rekurzivního prohledávání (př. maximálně 5 odkazů od zdrojů),
+omezení na konkrétní domény či subdomény (př. fit.cvut.cz vč. subdomén + cvut.cz bez subdomén, …),
+omezení na konkrétní přípony souborů (př. nestahovat obrázky, …)
+Nástroj upravuje ukládané soubory tak, aby:
+odkazy (v HTML, CSS, JS) vedly na lokální kopii (pokud existuje),
+se stažené soubory neopakovaly (pokud se neopakují na zdroji).
+Nástroj musí být konfigurovatelný ze souboru:
+definice "zakázaných" domén a stránek (jaké stránky a domény nikdy nestahovat),
+
+POPIS:
+Konzovola aplikace s uzivatelskym rozhranim pro stahovani z URL adres za pomoci protokolu HTTP. Bude poskytovat rozhrani s nabidkou "defaultniho stahovani" kde defaultni nastaveni muze byt uzivatelem prednastaveno a automaticky ulozeno ve slozce examples/. Krom defaultniho nastaveni bude i moznost vyberu automaticky ci uzivatelem predpripravenych "sablon". Neboli v examples/ si muze uzivatel zapamatovat caste sablony pro zrychleni prace. 
+   Hlavnim zpusobem prace je ale manualni download kde bude aplikace vyzivat uzivatele aby vlastnim vyberem, avsak muze vychzazet opet z sablony (pravdepodobne nabidka moznosti kde uzivatel napise 1 ... n k vyberu ci napise prikaz) urcoval co se bude stahovat, kam, a tak dale. Veci ktere nenastavi budou brany z default nastaveni. Plus bude prikaz ktery vypise aktualni nastaveni.
+
+Samotna prace programu bude spocivat v zalohovani a pamatovani si sablon pro praci. Dale vytvoreni "weboveho socketu" pro komunikaci se zadanym serverem. Musi informovat uzivatele zda je mozne navazat spojeni! Pote dle nastaveni bude posilat prelozene prikazy od uzivatele serveru (GET ...) a ukladat vysledek. Je mozne prochazet web rekurzivne zde se implementuje jednoduche "BFS" spise pouze budeme mit pamet nastivenych.
+
+Polymorphismus bude implementovan na mnoha mistech proto jsem si i dovolil vytvorit graf v DBS portalu viz "polymorph.png". Na vrcholu mame tridu CMenu ze ktere dedi CDownload a CSettings misto pro ukladani (toto je spise o dedeni nez li polymorfismu), pridavani a upravu sablon. Sablona jako takova je smesici parametru. To je dalsi Polymorfismus abstraktni rodic CParametr a jeho deti CUrl, CDirectory a CType ktere urcuji jak se bude stahovat.
+Hlavni polymorph je ale u stahovani kde mame ruzne typy ktere chceme stahovat.
+
+LEGENDA K POLYMORPH.PNG:
+Plna cara = polymorph -> dedeni (nizsi je dite)
+Teckovana cara = Zavislost na tride nikoliv polymorph
+Hashtag = metoda
+Asterisk = atribut
+
+Rychle spusteni pokud je v ARG dodana adresa/y proved s nima Default download
